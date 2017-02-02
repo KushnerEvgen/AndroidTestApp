@@ -5,9 +5,21 @@
     android:weightSum="1">
 
     <TextView
-        android:text="KEK"
+        android:text="My basic menu"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="102sp"
         android:id="@+id/textView"
-        android:layout_weight="0.08" />
+        android:textColor="@color/colorPrimaryDark"
+        android:background="@color/colorAccent"
+        android:textSize="42sp"
+        android:gravity="center"
+        />
+
+    <ListView
+        android:id="@+id/lvMain"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </ListView>
+
 </LinearLayout>
