@@ -1,20 +1,19 @@
 package com.example.jenek_pc.myapp;
 
-import android.app.Activity;
+import android.support.v4.app.FragmentTransaction;
 import android.content.Context;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.app.FragmentManager;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.LinearLayout;
 import android.widget.ListView;
-import android.app.AlertDialog;
-import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class MainActivity extends Activity {
+public class MainActivity extends FragmentActivity {
 
     public String[] get_names( ArrayList<MenuPart> x)
     {
@@ -30,6 +29,18 @@ public class MainActivity extends Activity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        FragmentManager fm = getSupportFragmentManager();
+
+        FragmentTransaction transaction= fm.beginTransaction();
+
+        MenuFragment mf = new MenuFragment();
+
+        transaction.add(R.id.menu,mf);
+
+        transaction.commit();
+
+
 
         final ArrayList<MenuPart> MenuPartArray = new ArrayList< MenuPart>();
 
@@ -51,10 +62,20 @@ public class MainActivity extends Activity {
         lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
-                adapter.remove(adapter.getItem(position));
+                adapter.add(adapter.getItem(position));
 
         }
 
+        });
+
+        lvMain.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener() {
+            @Override
+            public boolean onItemLongClick(AdapterView<?> arg0, View arg1,
+                                           int position, long id) {
+                adapter.remove(adapter.getItem(position));
+
+                return true;
+            }
         });
     }
 }
