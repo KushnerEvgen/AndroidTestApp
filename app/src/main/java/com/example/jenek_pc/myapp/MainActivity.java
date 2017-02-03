@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Adapter;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -32,31 +33,28 @@ public class MainActivity extends Activity {
 
         final ArrayList<MenuPart> MenuPartArray = new ArrayList< MenuPart>();
 
-        MenuPart first = new MenuPart("first");
-        MenuPartArray.add(first);
-        MenuPart second = new MenuPart("second");
-        MenuPartArray.add(second);
-        MenuPart end = new MenuPart("end");
-        MenuPartArray.add(end);
-
+        MenuPart first = new MenuPart("first",MenuPartArray);
+        MenuPart second = new MenuPart("second",MenuPartArray);
+        MenuPart end = new MenuPart("end",MenuPartArray);
 
         Context context = getApplicationContext();
 
-        ListView lvMain = (ListView) findViewById(R.id.lvMain);
+        final ListView lvMain = (ListView) findViewById(R.id.lvMain);
 
-        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
-                android.R.layout.simple_list_item_1, get_names(MenuPartArray));
+        final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
+                android.R.layout.simple_list_item_1);
+
+        adapter.addAll(get_names(MenuPartArray));
+
+        lvMain.setAdapter(adapter);
 
         lvMain.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
+                adapter.remove(adapter.getItem(position));
 
-                Toast toast = Toast.makeText(getApplicationContext(),
-                        MenuPartArray.get(position).tag, Toast.LENGTH_SHORT);
-                toast.show();;
         }
-        });
 
-        lvMain.setAdapter(adapter);
+        });
     }
 }

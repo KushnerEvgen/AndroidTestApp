@@ -23,8 +23,10 @@ public class MenuPart {
         toast.show();
     }
 
-    public MenuPart(String tag)
+    public MenuPart(String tag,ArrayList<MenuPart> x)
     {
+        x.add(this);
         this.tag = tag;
     }
+
 }
