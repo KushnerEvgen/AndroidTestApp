@@ -8,7 +8,6 @@ import android.support.v4.app.FragmentManager;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import java.util.ArrayList;
 import java.util.List;
@@ -28,6 +27,9 @@ public class MainActivity extends FragmentActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Context context = getApplicationContext(); // ?????????????????WHATA FUCK IS THIS
+
         setContentView(R.layout.activity_main);
 
         FragmentManager fm = getSupportFragmentManager();
@@ -40,15 +42,12 @@ public class MainActivity extends FragmentActivity {
 
         transaction.commit();
 
-
-
         final ArrayList<MenuPart> MenuPartArray = new ArrayList< MenuPart>();
 
         MenuPart first = new MenuPart("first",MenuPartArray);
         MenuPart second = new MenuPart("second",MenuPartArray);
         MenuPart end = new MenuPart("end",MenuPartArray);
 
-        Context context = getApplicationContext();
 
         final ListView lvMain = (ListView) findViewById(R.id.lvMain);
 

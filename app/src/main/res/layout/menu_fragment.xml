@@ -3,10 +3,17 @@
     android:orientation="vertical" android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:text="KEKE"
-        android:gravity="center"
+    <!--<TextView-->
+        <!--android:text="KEKE"-->
+        <!--android:gravity="center"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent" />-->
+
+    <ListView
+        android:id="@+id/lvMenu"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        android:layout_height="0dp"
+        android:layout_weight="1">
+    </ListView>
 
 </LinearLayout>
