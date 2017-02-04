@@ -6,6 +6,8 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.app.FragmentManager;
 import android.view.View;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
@@ -28,7 +30,7 @@ public class MainActivity extends FragmentActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        Context context = getApplicationContext(); // ?????????????????WHATA FUCK IS THIS
+        Context context = getApplicationContext();
 
         setContentView(R.layout.activity_main);
 
@@ -36,7 +38,9 @@ public class MainActivity extends FragmentActivity {
 
         FragmentTransaction transaction= fm.beginTransaction();
 
-        MenuFragment mf = new MenuFragment();
+        final MenuFragment mf = new MenuFragment();
+
+        transaction.setCustomAnimations(R.anim.slide_from_left,R.anim.exit_to_left);
 
         transaction.add(R.id.menu,mf);
 
@@ -51,6 +55,9 @@ public class MainActivity extends FragmentActivity {
 
         final ListView lvMain = (ListView) findViewById(R.id.lvMain);
 
+        final Animation anim = AnimationUtils.loadAnimation(this,R.anim.slide_from_left);
+
+
         final ArrayAdapter<String> adapter = new ArrayAdapter<String>(this,
                 android.R.layout.simple_list_item_1);
 
@@ -62,7 +69,7 @@ public class MainActivity extends FragmentActivity {
             public void onItemClick(AdapterView<?> parent, View view,
                                     int position, long id) {
                 adapter.add(adapter.getItem(position));
-
+                lvMain.startAnimation(anim);
         }
 
         });
